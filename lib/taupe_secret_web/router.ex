@@ -1,5 +1,6 @@
 defmodule TaupeSecretWeb.Router do
   use TaupeSecretWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,10 +15,17 @@ defmodule TaupeSecretWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
+  end
+
   scope "/", TaupeSecretWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+    resources "/articles", ArticleController
   end
 
   # Other scopes may use custom stacks.

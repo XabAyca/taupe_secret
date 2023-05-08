@@ -47,5 +47,6 @@ defmodule TaupeSecretWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug Pow.Plug.Session, otp_app: :taupe_secret
   plug TaupeSecretWeb.Router
 end
