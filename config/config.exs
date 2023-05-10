@@ -60,6 +60,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :taupe_secret, :pow,
+  web_module: TaupeSecretWeb,
   user: TaupeSecret.Users.User,
   repo: TaupeSecret.Repo
 

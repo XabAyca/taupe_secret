@@ -24,7 +24,6 @@ defmodule TaupeSecretWeb.Router do
   scope "/", TaupeSecretWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
     resources "/articles", ArticleController
   end
 
