@@ -5,6 +5,7 @@ defmodule TaupeSecret.Articles.Article do
   schema "articles" do
     field :body, :string
     field :title, :string
+    belongs_to :user, TaupeSecret.Users.User
 
     timestamps()
   end
@@ -12,7 +13,7 @@ defmodule TaupeSecret.Articles.Article do
   @doc false
   def changeset(article, attrs) do
     article
-    |> cast(attrs, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(attrs, [:title, :body, :user_id])
+    |> validate_required([:title, :body, :user_id])
   end
 end

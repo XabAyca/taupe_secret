@@ -4,6 +4,7 @@ defmodule TaupeSecret.Users.User do
 
   schema "users" do
     pow_user_fields()
+    has_many :articles, TaupeSecret.Articles.Article
 
     timestamps()
   end
