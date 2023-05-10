@@ -14,10 +14,10 @@
     <div class="sr-only">
       <.link navigate={~p"/articles/#{article}"}>Show</.link>
     </div>
-    <.link navigate={~p"/articles/#{article}/edit"}>Edit</.link>
+    <.link :if={Pow.Plug.current_user(@conn) &&  Pow.Plug.current_user(@conn).id == article.user_id} navigate={~p"/articles/#{article}/edit"}>Edit</.link>
   </:action>
   <:action :let={article}>
-    <.link href={~p"/articles/#{article}"} method="delete" data-confirm="Are you sure?">
+    <.link :if={Pow.Plug.current_user(@conn) && Pow.Plug.current_user(@conn).id == article.user_id} href={~p"/articles/#{article}"} method="delete" data-confirm="Are you sure?">
       Delete
     </.link>
   </:action>

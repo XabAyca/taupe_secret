@@ -11,17 +11,10 @@
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
       <%= if Pow.Plug.current_user(@conn) do %>
         <p><%= @current_user.email %></p>
-        <.link href={~p"/session"} method="delete" data-confirm="Are you sure?">
-          Sign out
-        </.link>
-      <% else %>
-        <.link href={~p"/registration/new"}>
-          Registration
-        </.link>
-        <.link href={~p"/session/new"}>
-          Connexion
-        </.link>
       <% end %>
+      <.link :if={Pow.Plug.current_user(@conn)} href={~p"/session"} method="delete">Sign out</.link>
+      <.link :if={is_nil Pow.Plug.current_user(@conn)} navigate={~p"/sign_up"}>Registration</.link>
+      <.link :if={is_nil Pow.Plug.current_user(@conn)} navigate={~p"/login"}>Sign In</.link>
     </div>
   </div>
 </header>

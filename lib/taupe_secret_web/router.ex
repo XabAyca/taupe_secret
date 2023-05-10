@@ -15,6 +15,20 @@ defmodule TaupeSecretWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  scope "/", Pow.Phoenix, as: "pow" do
+    pipe_through :browser
+
+    get "/sign_up", RegistrationController, :new
+    post "/sign_up", RegistrationController, :create
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+  end
+
   scope "/" do
     pipe_through :browser
 
@@ -22,9 +36,16 @@ defmodule TaupeSecretWeb.Router do
   end
 
   scope "/", TaupeSecretWeb do
+    pipe_through [:browser, :protected]
+
+    resources "/articles", ArticleController, except: [:index, :show]
+  end
+
+  scope "/", TaupeSecretWeb do
     pipe_through :browser
 
-    resources "/articles", ArticleController
+    get "/", ArticleController, :index
+    resources "/articles", ArticleController, only: [:index, :show]
   end
 
   # Other scopes may use custom stacks.

@@ -15,7 +15,14 @@ defmodule TaupeSecretWeb.ArticleController do
   end
 
   def create(conn, %{"article" => article_params}) do
-    case Articles.create_article(article_params) do
+    article = Articles.create_article(
+      Map.put(
+        article_params,
+        "user_id",
+        Pow.Plug.current_user(conn).id
+      )
+    )
+    case article do
       {:ok, article} ->
         conn
         |> put_flash(:info, "Article created successfully.")

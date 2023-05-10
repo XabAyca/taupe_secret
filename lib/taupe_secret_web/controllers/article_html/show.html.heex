@@ -2,7 +2,7 @@
   Article <%= @article.id %>
   <:subtitle>This is a article record from your database.</:subtitle>
   <:actions>
-    <.link href={~p"/articles/#{@article}/edit"}>
+    <.link :if={get_in(Pow.Plug.current_user(@conn), [:id]) == @article.user_id} href={~p"/articles/#{@article}/edit"}>
       <.button>Edit article</.button>
     </.link>
   </:actions>
