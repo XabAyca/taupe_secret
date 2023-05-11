@@ -1,21 +1,21 @@
 <div class="mx-auto max-w-sm">
   <.header class="text-center">
-    Edit Account
+    Mon compte
   </.header>
 
   <.simple_form :let={f} for={@changeset} as={:user} action={@action} phx-update="ignore">
     <.error :if={Pow.Plug.extension_enabled?(@conn, PowResetPassword) && @changeset.data.unconfirmed_email}>
       <span>Click the link in the confirmation email to change your email to <span class="font-semibold"><%= @changeset.data.unconfirmed_email %></span>.</span>
     </.error>
-    <.error :if={@changeset.action}>Oops, something went wrong! Please check the errors below.</.error>
-    <.input field={f[:current_password]} type="password" label="Current password" value={nil} required />
+    <.error :if={@changeset.action}>Oops, quelque chose s'est mal passé! Vérifies les erreurs ci-dessous.</.error>
+    <.input field={f[:current_password]} type="password" label="Mot de passe actuel" value={nil} required />
     <.input field={f[Pow.Ecto.Schema.user_id_field(@changeset)]} type={Pow.Ecto.Schema.user_id_field(@changeset) == :email && "email" || "text"} label={Phoenix.Naming.humanize(Pow.Ecto.Schema.user_id_field(@changeset))} required />
-    <.input field={f[:password]} type="password" label="New password" />
-    <.input field={f[:password_confirmation]} type="password" label="Confirm new password" />
+    <.input field={f[:password]} type="password" label="Nouveau mot de passe" />
+    <.input field={f[:password_confirmation]} type="password" label="Confirmation du nouveau mot de passe" />
 
     <:actions>
       <.button phx-disable-with="Updating..." class="w-full">
-        Update <span aria-hidden="true">→</span>
+        Mise à jour <span aria-hidden="true">→</span>
       </.button>
     </:actions>
   </.simple_form>

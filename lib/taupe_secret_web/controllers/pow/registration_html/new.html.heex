@@ -1,23 +1,23 @@
 <div class="mx-auto max-w-sm">
   <.header class="text-center">
-    Register
+    Inscription
     <:subtitle>
-      Already have an account?
+      Déjà un compte ?
       <.link navigate={Pow.Phoenix.Routes.path_for(@conn, Pow.Phoenix.SessionController, :new)} class="font-semibold text-brand hover:underline">
-        Sign in
-      </.link> now.
+        Connecte toi
+      </.link> maintenant.
     </:subtitle>
   </.header>
 
   <.simple_form :let={f} for={@changeset} as={:user} action={@action} phx-update="ignore">
-    <.error :if={@changeset.action}>Oops, something went wrong! Please check the errors below.</.error>
+    <.error :if={@changeset.action}>Oops, quelque chose s'est mal passé! Vérifies les erreurs ci-dessous.</.error>
     <.input field={f[Pow.Ecto.Schema.user_id_field(@changeset)]} type={Pow.Ecto.Schema.user_id_field(@changeset) == :email && "email" || "text"} label={Phoenix.Naming.humanize(Pow.Ecto.Schema.user_id_field(@changeset))} required />
-    <.input field={f[:password]} type="password" label="Password" required />
-    <.input field={f[:password_confirmation]} type="password" label="Confirm password" required />
+    <.input field={f[:password]} type="password" label="Mot de passe" required />
+    <.input field={f[:password_confirmation]} type="password" label="Confirmation mot de passe" required />
 
     <:actions>
       <.button phx-disable-with="Registering..." class="w-full">
-        Register <span aria-hidden="true">→</span>
+        Créer mon compte <span aria-hidden="true">→</span>
       </.button>
     </:actions>
   </.simple_form>

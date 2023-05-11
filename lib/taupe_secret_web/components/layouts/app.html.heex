@@ -2,19 +2,19 @@
   <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
     <div class="flex items-center gap-4">
       <a href="/">
-        <img src={~p"/images/logo.svg"} width="36" />
+        <img src={~p"/images/logo.svg"} width="72" />
       </a>
       <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        v<%= Application.spec(:phoenix, :vsn) %>
+        Octopus Gun Club
       </p>
     </div>
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
       <%= if Pow.Plug.current_user(@conn) do %>
         <p><%= @current_user.email %></p>
       <% end %>
-      <.link :if={Pow.Plug.current_user(@conn)} href={~p"/session"} method="delete">Sign out</.link>
-      <.link :if={is_nil Pow.Plug.current_user(@conn)} navigate={~p"/sign_up"}>Registration</.link>
-      <.link :if={is_nil Pow.Plug.current_user(@conn)} navigate={~p"/login"}>Sign In</.link>
+      <.link :if={Pow.Plug.current_user(@conn)} href={~p"/session"} method="delete">Deconnexion</.link>
+      <.link :if={is_nil Pow.Plug.current_user(@conn)} navigate={~p"/sign_up"}>S'inscrire</.link>
+      <.link :if={is_nil Pow.Plug.current_user(@conn)} navigate={~p"/login"}>Connexion</.link>
     </div>
   </div>
 </header>
