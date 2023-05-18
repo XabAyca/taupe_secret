@@ -1,53 +1,19 @@
-<%!-- <div class="mx-auto max-w-sm">
-  <.header class="text-center">
-    Connexion
-    <:subtitle>
-      Pas encore de compte ?
-      <.link navigate={Pow.Phoenix.Routes.path_for(@conn, Pow.Phoenix.RegistrationController, :new)} class="font-semibold text-brand hover:underline">
-        Enregistre toi
-      </.link> maintenant.
-    </:subtitle>
-  </.header>
-
-  <.simple_form :let={f} for={@changeset} as={:user} action={@action} phx-update="ignore">
-    <.error :if={@changeset.action}>Oops, quelque chose s'est mal passé! Vérifies les erreurs ci-dessous.</.error>
-    <.input field={f[Pow.Ecto.Schema.user_id_field(@changeset)]} type={Pow.Ecto.Schema.user_id_field(@changeset) == :email && "email" || "text"} label={Phoenix.Naming.humanize(Pow.Ecto.Schema.user_id_field(@changeset))} required />
-    <.input field={f[:password]} type="password" label="Mot de passe" value={nil} required />
-
-    <:actions :let={f} :if={Pow.Plug.extension_enabled?(@conn, PowPersistentSession) || Pow.Plug.extension_enabled?(@conn, PowResetPassword)}>
-      <.input :if={Pow.Plug.extension_enabled?(@conn, PowPersistentSession)} field={f[:persistent_session]} type="checkbox" label="Se souvenir de moi" />
-      <.link :if={Pow.Plug.extension_enabled?(@conn, PowResetPassword)} href={Pow.Phoenix.Routes.path_for(@conn, PowResetPassword.Phoenix.ResetPasswordController, :new)} class="text-sm font-semibold">
-        Mémoire pourrie ?
-      </.link>
-    </:actions>
-
-    <:actions>
-      <.button phx-disable-with="Signing in..." class="w-full">
-        Se connecter <span aria-hidden="true">→</span>
-      </.button>
-    </:actions>
-  </.simple_form>
-</div> --%>
 <div class="h-full">
-  <!-- Left column container with background-->
+
   <div
     class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
     <div
       class="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
       <img
-        src={~p"/images/adventure.svg"}
+        src={~p"/images/connect.svg"}
         class="w-full"
         alt="Sample image" />
     </div>
 
-    <!-- Right column container -->
     <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12">
       <.simple_form :let={f} for={@changeset} as={:user} action={@action} phx-update="ignore">
-        <.error :if={@changeset.action}>Oops, quelque chose s'est mal passé! Vérifies les erreurs ci-dessous.</.error>
-        <!--Sign in section-->
         <div class="flex flex-row items-center justify-center lg:justify-start">
-          <p class="mb-0 mr-4 text-lg">Sign in with</p>
-          <!-- Facebook -->
+          <p class="mb-0 mr-4 text-lg">Se connecter avec</p>
           <button
             type="button"
             data-te-ripple-init
@@ -63,30 +29,16 @@
             </svg>
           </button>
         </div>
-        <!-- Separator between social media sign in and email/password sign in -->
         <div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
           <p class="mx-4 mb-0 text-center font-semibold dark:text-neutral-500">
-            Or
+            Ou
           </p>
         </div>
-        <!-- Email input -->
+        <.error :if={@changeset.action}>Oops, quelque chose s'est mal passé! Vérifies les erreurs ci-dessous.</.error>
         <.input_sign_in field={f[Pow.Ecto.Schema.user_id_field(@changeset)]} type="email" label="Email" required />
+        <.input_sign_in field={f[:password]} type="password" label="Mot de passe" value={nil} required />
 
-        <!-- Password input -->
-        <div class="relative mb-6" data-te-input-wrapper-init>
-          <input
-            type="password"
-            class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-            id="exampleFormControlInput22"
-            placeholder="Password" />
-          <label
-            for="exampleFormControlInput22"
-            class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-            >Password
-          </label>
-        </div>
-
-        <div class="mb-6 flex items-center justify-between">
+        <%!-- <div class="mb-6 flex items-center justify-between">
           <!-- Remember me checkbox -->
           <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
             <input
@@ -103,27 +55,18 @@
 
           <!--Forgot password link-->
           <a href="#!">Forgot password?</a>
-        </div>
-
-        <!-- Login button -->
-        <div class="text-center lg:text-left">
-          <button
-            type="button"
-            class="inline-block rounded bg-primary px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-            data-te-ripple-init
-            data-te-ripple-color="light">
-            Login
-          </button>
-
-          <!-- Register link -->
-          <p class="mb-0 mt-2 pt-1 text-sm font-semibold">
-            Don't have an account?
-            <a
-              href="#!"
-              class="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
-              >Register</a>
-          </p>
-        </div>
+        </div> --%>
+        <:actions>
+          <.button phx-disable-with="Signing in..." class="w-full">
+            Se connecter <span aria-hidden="true">→</span>
+          </.button>
+        </:actions>
+        <p>
+          Pas encore de compte ?
+          <.link navigate={Pow.Phoenix.Routes.path_for(@conn, Pow.Phoenix.RegistrationController, :new)} class="font-semibold text-brand hover:underline">
+            Enregistre toi
+          </.link>
+        </p>
       </.simple_form>
     </div>
   </div>
